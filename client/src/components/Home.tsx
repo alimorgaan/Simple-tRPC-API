@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { trpc } from "../trpc";
 import { useState, useEffect } from "react";
+import { TRPCClientError } from "@trpc/client";
 
 
 const Home = () => {
@@ -20,7 +21,7 @@ const Home = () => {
             await trpc.todo.addTodo.mutate({ title: newTitle });
             getTodos();
         } catch (err) {
-            if (err instanceof Error) {
+            if (err instanceof TRPCClientError) {
                 setError(err.message);
             }
         }
@@ -32,7 +33,7 @@ const Home = () => {
             const todos = await trpc.todo.getTodos.query();
             setTodos(todos);
         } catch (err) {
-            if (err instanceof Error) {
+            if (err instanceof TRPCClientError) {
                 setError(err.message);
             }
         }
