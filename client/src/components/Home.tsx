@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 const Home = () => {
     const [todos, setTodos] = useState<Todo[]>();
     const [newTitle, setnewTitle] = useState('');
+    const [error, setError] = useState<string>('');
 
     const navigate = useNavigate();
 
@@ -15,14 +16,27 @@ const Home = () => {
     }
 
     const handleAddTodo = async () => {
-        await trpc.todo.addTodo.mutate({ title: newTitle });
-        getTodos();
+        try {
+            await trpc.todo.addTodo.mutate({ title: newTitle });
+            getTodos();
+        } catch (err) {
+            if (err instanceof Error) {
+                setError(err.message);
+            }
+        }
     }
 
 
     const getTodos = async () => {
-        const todos = await trpc.todo.getTodos.query();
-        setTodos(todos);
+        try {
+            const todos = await trpc.todo.getTodos.query();
+            setTodos(todos);
+        } catch (err) {
+            if (err instanceof Error) {
+                setError(err.message);
+            }
+        }
+
     }
 
     useEffect(() => {
@@ -47,6 +61,7 @@ const Home = () => {
             <button onClick={handleAddTodo}>Add Todo</button>
             <br />
             <button onClick={handleLogout}>logout</button>
+            <h2>{error}</h2>
         </div>
     )
 
