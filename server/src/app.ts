@@ -3,7 +3,7 @@ import cors from 'cors';
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
 import { appRouter } from './routers/index.js';
 import { createContext } from './trpc.js';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library.js';
+
 
 
 const app: express.Application = express();
@@ -22,4 +22,6 @@ app.listen(3001, () => {
 }
 );
 
+
 export type AppRouter = typeof appRouter;
+

@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { t } from '../trpc.js'
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../db.js';
 import jwt from 'jsonwebtoken';
 import { hash, genSalt, compare } from 'bcrypt';
 import { TRPCError } from '@trpc/server';
 
-const prisma = new PrismaClient();
 
 export const userRouter = t.router({
     login: t.procedure

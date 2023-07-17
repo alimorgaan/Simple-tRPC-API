@@ -1,10 +1,10 @@
 import { t } from '../trpc.js';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../db.js';
 import { z } from 'zod';
 import { isAuth } from '../middlewares/isAuth.js';
 import { TRPCError } from '@trpc/server';
 
-const prisma = new PrismaClient();
+
 const protectedProcedure = t.procedure.use(isAuth);
 
 
