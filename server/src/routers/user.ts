@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { t } from '../trpc.js'
-import { prisma } from '../db.js';
+import prisma from '../db.js';
 import jwt from 'jsonwebtoken';
 import { hash, genSalt, compare } from 'bcrypt';
 import { TRPCError } from '@trpc/server';

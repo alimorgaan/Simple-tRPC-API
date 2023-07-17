@@ -1,5 +1,5 @@
 import { t } from '../trpc.js';
-import { prisma } from '../db.js';
+import prisma from '../db.js';
 import { z } from 'zod';
 import { isAuth } from '../middlewares/isAuth.js';
 import { TRPCError } from '@trpc/server';
